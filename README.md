@@ -4,3 +4,9 @@ ShowDeck is a show control system, supporting audio, video and the OSC protocol 
 Developed for my **OCR COMPUTER SCIENCE A LEVEL NEA**
 
 This repository does **NOT** accept contributions due to the nature of the project.
+
+## Setup Instructions
+
+CD into directory
+`npm install`
+`npm run tauri dev`
