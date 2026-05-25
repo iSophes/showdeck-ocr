@@ -12,12 +12,17 @@
   "app": {
     "windows": [
       {
-        "title": "showdeck",
+        "title": "ShowDeck",
         "width": 800,
-        "height": 600
+        "height": 450,
+        "maximized": true
       }
     ],
     "security": {
+      "assetProtocol": {
+        "enable": true,
+        "scope": ["$APPDATA/**"]
+      },
       "csp": null
     }
   },
