@@ -1,4 +1,5 @@
 import { Signal } from "@soncodi/signal"; // Signal library so we can have signals.
+import { endMedia, pauseMedia } from "../media/playmedia";
 
 export enum CueState {
   Inactive = "Inactive",
@@ -7,7 +8,19 @@ export enum CueState {
   Ended = "Ended",
 } // Enum for types of cue state
 
-export class Cue {
+export interface CueInterface {
+  id: number;
+  name: string;
+  status: CueState;
+  preWait: number;
+  postWait: number;
+
+  startCue(): void;
+  pauseCue(): void;
+  endCue(): void;
+}
+
+export class Cue implements CueInterface {
   id: number;
   name: string;
   status: CueState;
