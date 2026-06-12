@@ -20,6 +20,7 @@ export class CueManager {
   selectedCue: number;
 
   constructor() {
+    // creates a cuemanager
     this.cues = []; // cues can be an array
     this.activeCues = [];
     this.cueSignals = {};
@@ -28,6 +29,7 @@ export class CueManager {
   }
 
   addCue(
+    // creates a new cue for our cue manager.
     cueType: cueTypeEnum,
     cueName: string,
     extraData: { filePath: string },
@@ -44,52 +46,53 @@ export class CueManager {
   }
 
   removeCue(cueId: number) {
-    sortCues(this.cues);
+    // removes a specific cue from the manager
+    // NOTE: Do we need to resort at the end?
+
+    sortCues(this.cues); // sort it in order first in case we aren't in order
     this.cues = this.cues.filter((cue) => {
       return cue.id !== cueId;
-    });
-    sortCues(this.cues);
+    }); // keeps everything that doesn't have our cue id
+    sortCues(this.cues); // resort
   }
 
   getCueById(cueId: number) {
+    // gets a cue by id
     let cue = this.cues[cueId];
-    console.log(cue);
 
     return cue;
   }
 
   previousCue() {
     if (this.selectedCue == 0) {
-      this.selectedCue = this.cues.length - 1;
-      return;
+      this.selectedCue = this.cues.length - 1; // Get last cue in manager if we are at the start of the list
+      return; // return once we get it so we dont go back again
     }
 
-    this.selectedCue -= 1;
+    this.selectedCue -= 1; // go to previous cue
   }
 
   playCue(cueId: number) {
-    console.log(cueId);
-
+    // play our cue by id
     if (cueId < 0) {
+      // if we don't have one selected, select the first cue
       cueId = 0;
     }
 
-    let cue = this.getCueById(cueId);
-    console.log(cue.name);
+    let cue = this.getCueById(cueId); // get our actual cue
 
     if (!cue) {
       return;
     } // Check for types, will most likely always exist.
 
-    cue.startCue();
+    this.selectedCue += 1; // move play head forward to next cue
+    cue.startCue(); // start our cue
     if (!this.activeCues[cue.id]) {
       this.activeCues.push(cue);
-    }
-
-    this.selectedCue += 1;
+    } // make it active
 
     if (this.selectedCue == this.cues.length) {
-      this.selectedCue = 0;
+      this.selectedCue = 0; // go back to start of the queue if we hit the end of it
     }
   }
 
@@ -116,7 +119,7 @@ export class CueManager {
     }
     this.activeCues = [];
 
-    this.selectedCue = -1; // deselect everything
+    this.selectedCue = 0; // deselect everything
   }
 
   panicNext() {
