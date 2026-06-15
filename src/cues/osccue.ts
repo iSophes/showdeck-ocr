@@ -1,7 +1,5 @@
-import {Client} from "node-osc"
+import { invoke } from "@tauri-apps/api/core";
 import { Cue } from "./cue";
-
-const client = new Client('127.0.0.1', 3333);
 
 export class OSCCue extends Cue {
   // Inherit from cue!
@@ -12,12 +10,17 @@ export class OSCCue extends Cue {
     this.command = command;
 
     if (!command) {
-      this.command = ""
+      this.command = "";
     }
   }
 
   async startCue() {
     super.startCue(); // Start the cue
-    client.send(this.command, 200);
+
+    invoke("fire_osc", {
+      oscCommand: this.command,
+      address: "127.0.0.1",
+      port: 3333,
+    }); // fires a command in rust
   }
 }
