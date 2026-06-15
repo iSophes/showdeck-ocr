@@ -72,7 +72,7 @@ export function TitleButton(button: titleButtonType) {
 
   return (
     <button
-      className={`titlebutton text-ctp-overlay2 h-full w-12 bg-ctp-surface0 transition-colors ${button !== titleButtonType.Close ? "hover:bg-ctp-surface1 hover:text-ctp-text" : "hover:bg-ctp-red-500 hover:text-white"}`}
+      className={`titlebutton text-ctp-overlay2 h-full w-12 bg-ctp-surface0 transition-colors ${button !== titleButtonType.Close ? "hover:bg-ctp-surface1 hover:text-ctp-text focus:bg-ctp-surface2" : "hover:bg-ctp-red-400 focus:bg-ctp-red-700 hover:text-white"}`}
       onClick={() => clickButton(button)} // we do this so we dont immediately call it, but we can still pass a parameter in
     >
       {text}

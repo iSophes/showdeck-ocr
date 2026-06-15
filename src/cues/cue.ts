@@ -1,5 +1,4 @@
 import { Signal } from "@soncodi/signal"; // Signal library so we can have signals.
-import { endMedia, pauseMedia } from "../media/playmedia";
 
 export enum CueState {
   Inactive = "Inactive",

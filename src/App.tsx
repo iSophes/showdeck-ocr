@@ -8,6 +8,11 @@ const cueManager = new CueManager();
 
 // Add some cues for testing
 
+cueManager.addCue(cueTypeEnum.OSC, "Test", {
+  oscCommand: "/test"
+});
+
+
 cueManager.addCue(cueTypeEnum.Media, "Dishes", {
   filePath: "assets/dishes.mp3",
 });

@@ -2,9 +2,10 @@ import { Signal } from "@soncodi/signal";
 import { CueInterface } from "./cue";
 import { MediaCue } from "./mediacue";
 import { endMedia } from "../media/playmedia";
-
+import { OSCCue } from "./osccue"
 export enum cueTypeEnum {
   "Media" = "Media",
+  "OSC" = "OSC"
 }
 
 function sortCues(cues: CueInterface[]): CueInterface[] {
@@ -32,17 +33,25 @@ export class CueManager {
     // creates a new cue for our cue manager.
     cueType: cueTypeEnum,
     cueName: string,
-    extraData: { filePath: string },
+    extraData: Partial<{ filePath: string , oscCommand: string }>,
   ) {
+    let newCue
     if (cueType == cueTypeEnum.Media) {
-      let newCue = new MediaCue(this.cues.length, cueName, extraData.filePath);
-      this.cues[newCue.id] = newCue;
-      sortCues(this.cues);
-
-      this.cueSignals[newCue.id.toString()] = [];
-
-      console.log(this.cues);
+      newCue = new MediaCue(this.cues.length, cueName, extraData.filePath ? extraData.filePath : "");
     }
+
+    if (cueType == cueTypeEnum.OSC) {
+      newCue = new OSCCue(this.cues.length, cueName, extraData.oscCommand ? extraData.oscCommand : "");
+    }
+
+    if (!newCue) {
+      return;
+    }
+
+    this.cues[newCue.id] = newCue;
+    sortCues(this.cues);
+
+    this.cueSignals[newCue.id.toString()] = [];
   }
 
   removeCue(cueId: number) {
