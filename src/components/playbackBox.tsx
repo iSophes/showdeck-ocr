@@ -1,4 +1,4 @@
-export function playbackBox(text: string, callback: () => void) {
+export function PlaybackBox(text: string, callback: () => void) {
   // Text is our text inside the button, callback is what it runs when clicked.
   // Export playbackBox as a function, so we can just get playbackBox() and we get a usable box!
   return (
@@ -7,7 +7,7 @@ export function playbackBox(text: string, callback: () => void) {
       // our box to be a square.
       onClick={callback}
     >
-      {text}{" "}
+      {text}
       {/* Wrapping 'text' in curly braces lets us use our parameter instead of just getting '{text}' literally. */}
     </button>
   );

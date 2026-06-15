@@ -1,2 +1,30 @@
 @import "tailwindcss";
 @import "@catppuccin/tailwindcss/mocha.css";
+
+@font-face {
+    font-family: "SegoeIcons";
+    src: url("./assets/SEGOEICONS.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.titlebar {
+    display: grid;
+    grid-template-columns: auto max-content;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    right: 0;
+}
+
+.titlebar > .controls {
+    display: flex;
+}
+
+.titlebutton {
+    font-family: "SegoeIcons";
+    font-size: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
