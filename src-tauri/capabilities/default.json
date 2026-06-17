@@ -2,7 +2,9 @@
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
   "description": "Capability for the main window",
-  "windows": ["main"],
+  "windows": [
+    "main"
+  ],
   "permissions": [
     "core:window:default",
     "core:window:allow-start-dragging",
@@ -11,6 +13,8 @@
     "core:window:allow-maximize",
     "core:window:allow-unmaximize",
     "core:default",
-    "opener:default"
+    "opener:default",
+    "opener:allow-open-path",
+    "dialog:default"
   ]
 }

@@ -1,7 +1,9 @@
 import "./App.css"; // Import our App.css file for styling, lets us use tailwind.
 import { PlaybackBox } from "./components/PlaybackBox";
 import { TitleButton, titleButtonType } from "./components/TitleButton";
+import { TopbarButton } from "./components/TopbarButton";
 import { CueManager, cueTypeEnum } from "./cues/cuemanager";
+import { loadProject } from "./files/fileHandler";
 import { endMedia, pauseMedia, unpauseMedia } from "./media/playmedia";
 
 const cueManager = new CueManager();
@@ -9,9 +11,8 @@ const cueManager = new CueManager();
 // Add some cues for testing
 
 cueManager.addCue(cueTypeEnum.OSC, "Test", {
-  oscCommand: "/test"
+  oscCommand: "/test",
 });
-
 
 cueManager.addCue(cueTypeEnum.Media, "Dishes", {
   filePath: "assets/dishes.mp3",
@@ -55,6 +56,11 @@ function App() {
     <div className="bg-ctp-base text-ctp-text w-full min-h-screen flex gap-3 p-5">
       <div className="titlebar bg-ctp-surface0 h-10 w-full flex">
         <div data-tauri-drag-region></div>
+        <div className="bg-transparent h-full inset-0 absolute flex self-center pointer-events-none justify-start align-middle items-center">
+          {TopbarButton("Load", () => {
+            loadProject();
+          })}
+        </div>
         <div className="bg-transparent inset-0 absolute flex self-center pointer-events-none justify-center align-middle items-center">
           <text className="text-center pointer-events-auto bg-transparent text-sm">
             ShowDeck | testfile.showdeck | 300 Cues{" "}
