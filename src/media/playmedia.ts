@@ -37,7 +37,8 @@ export async function playMedia(path: string): Promise<boolean> {
   const assetUrl = convertFileSrc(filePath); // Turn it into a usable URL.
 
   const video: HTMLElement | null = document.getElementById("my-video"); // Get the video handler in our app.
-
+  console.log("filePath:", filePath);
+  console.log("assetUrl:", assetUrl);
   if (!video) {
     return false;
   } // Edge case for types, it will never actually be nil.

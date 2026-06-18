@@ -9,11 +9,12 @@ import { endMedia, pauseMedia, unpauseMedia } from "./media/playmedia";
 const cueManager = new CueManager();
 
 // Add some cues for testing
-cueManager.addCue(cueTypeEnum.Media, "night", {
-  filePath: "./assets/night.mp3",
+
+cueManager.addCue(cueTypeEnum.Media, "my way", {
+  filePath: "/assets/my way.mp3",
 });
 
-let x = 14;
+let x = 9;
 for (var i = 0; i < x; i++) {
   cueManager.addCue(cueTypeEnum.OSC, `Test${i}`, {
     oscCommand: "/pb/7/go",
@@ -25,7 +26,6 @@ let playing = false;
 function previousCue() {}
 
 function go() {
-  endMedia();
   cueManager.playCue(cueManager.selectedCue);
 }
 
