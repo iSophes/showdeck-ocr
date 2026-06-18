@@ -19,8 +19,8 @@ export class OSCCue extends Cue {
 
     invoke("fire_osc", {
       oscCommand: this.command,
-      address: "127.0.0.1",
-      port: 3333,
+      address: "192.168.200.1",
+      port: 8000,
     }); // fires a command in rust
   }
 }

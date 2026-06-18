@@ -9,18 +9,16 @@ import { endMedia, pauseMedia, unpauseMedia } from "./media/playmedia";
 const cueManager = new CueManager();
 
 // Add some cues for testing
-
-cueManager.addCue(cueTypeEnum.OSC, "Test", {
-  oscCommand: "/test",
+cueManager.addCue(cueTypeEnum.Media, "night", {
+  filePath: "./assets/night.mp3",
 });
 
-cueManager.addCue(cueTypeEnum.Media, "Dishes", {
-  filePath: "assets/dishes.mp3",
-});
-
-cueManager.addCue(cueTypeEnum.Media, "Abracadabra", {
-  filePath: "assets/abracadabra.mp4",
-});
+let x = 14;
+for (var i = 0; i < x; i++) {
+  cueManager.addCue(cueTypeEnum.OSC, `Test${i}`, {
+    oscCommand: "/pb/7/go",
+  });
+}
 
 let playing = false;
 
