@@ -9,5 +9,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 );
 
 document.addEventListener("contextmenu", (event) => {
-  //event.preventDefault();
+  event.preventDefault();
 });

@@ -2,9 +2,9 @@ import "./App.css"; // Import our App.css file for styling, lets us use tailwind
 import { PlaybackBox } from "./components/PlaybackBox";
 import { TitleButton, titleButtonType } from "./components/TitleButton";
 import { TopbarButton } from "./components/TopbarButton";
-import { CueManager, cueTypeEnum } from "./cues/cuemanager";
+import { CueManager } from "./cues/cuemanager";
 import { loadProject } from "./files/fileHandler";
-import { endMedia, pauseMedia, unpauseMedia } from "./media/playmedia";
+import { pauseMedia, unpauseMedia } from "./media/playmedia";
 
 const cueManager = new CueManager();
 

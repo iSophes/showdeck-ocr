@@ -1,5 +1,4 @@
 import { invoke } from "@tauri-apps/api/core";
-import { playMedia } from "../media/playmedia";
 import { Cue, CueInterface } from "./cue";
 
 export interface MediaCueInterface extends CueInterface {

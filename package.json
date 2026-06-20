@@ -16,10 +16,7 @@
     "@tauri-apps/plugin-fs": "^2.5.1",
     "@tauri-apps/plugin-opener": "^2",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "tauri-plugin-libmpv-api": "^0.3.2",
-    "tauri-plugin-media-api": "^0.1.1",
-    "tauri-plugin-mpv-api": "^0.5.2"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@catppuccin/tailwindcss": "^1.0.0",

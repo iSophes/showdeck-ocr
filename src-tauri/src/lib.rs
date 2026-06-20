@@ -71,8 +71,6 @@ pub fn run() {
     gstreamer::init().expect("Gstreamer failed to load"); // if gstreamer fails to load
 
     tauri::Builder::default()
-        .plugin(tauri_plugin_mpv::init())
-        .plugin(tauri_plugin_libmpv::init())
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
