@@ -16,9 +16,9 @@ struct AppState(pub Mutex<AudioManager>); // makes things mutable so we can edit
 
 #[tauri::command]
 async fn play_audio(id: String, uri: String, state: State<'_, AppState>) -> Result<(), String> {
-    let mut manager = state.inner().0.lock().unwrap();
+    let mut manager = state.inner().0.lock().unwrap(); // Get our audio manager so we can get multiple playing cues
 
-    // Stop existing pipeline with same id if any
+    // Get any existing pipelines with our cue and stop it (i.e: we try and play our cue again)
     if let Some(existing) = manager.pipelines.get(&id) {
         existing
             .set_state(gstreamer::State::Null)
@@ -26,16 +26,17 @@ async fn play_audio(id: String, uri: String, state: State<'_, AppState>) -> Resu
     }
 
     let pipeline = gstreamer::parse::launch(&format!(
+        // get our audio file, process it and set it to our primary speakers
         "uridecodebin uri=\"{}\" ! audioconvert ! audioresample ! autoaudiosink",
         uri
     ))
     .map_err(|e| e.to_string())?;
 
     pipeline
-        .set_state(gstreamer::State::Playing)
-        .map_err(|e| e.to_string())?;
+        .set_state(gstreamer::State::Playing) // make it play
+        .map_err(|e| e.to_string())?; //
 
-    manager.pipelines.insert(id, pipeline);
+    manager.pipelines.insert(id, pipeline); // set it to our state so that we can track it for future
     Ok(())
 }
 

@@ -45,25 +45,26 @@ export async function loadProject(cueManager: CueManager) {
     const answer = await ask("You have unsaved changes, are you sure?", {
       title: "Showdeck",
       kind: "warning",
-    });
+    }); // warns if we have unsaved changes
 
     if (!answer) {
-      return;
+      return; // stop if we dont want to load a new file
     }
   }
 
-  cueManager.removeAllCues();
-  const projectFilePath = await getProjectFilePath();
+  const projectFilePath = await getProjectFilePath(); // gets the project we want to load
 
   if (!projectFilePath) {
-    return;
+    return; // don't do anything if we dont have a valid project
   }
 
-  const parsedFile = await readTextFile(projectFilePath);
-  const Json = JSON.parse(parsedFile);
-  console.log(Json);
+  cueManager.removeAllCues(); // removes cues in current stack
+
+  const parsedFile = await readTextFile(projectFilePath); // reads our file
+  const Json = JSON.parse(parsedFile); // parses to dictionary
+
   for (var x in Json) {
-    let currentEnum = cueTypeEnum[Json[x].cueType as keyof typeof cueTypeEnum];
-    cueManager.addCue(currentEnum, Json[x].cueName, Json[x].extraData);
+    let currentEnum = cueTypeEnum[Json[x].cueType as keyof typeof cueTypeEnum]; // gets the current cue type
+    cueManager.addCue(currentEnum, Json[x].cueName, Json[x].extraData); // add the cue
   }
 }
