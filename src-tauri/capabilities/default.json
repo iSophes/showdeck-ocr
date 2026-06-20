@@ -15,6 +15,21 @@
     "core:default",
     "opener:default",
     "opener:allow-open-path",
-    "dialog:default"
+    "dialog:default",
+    "fs:default",
+    {
+      "identifier": "fs:allow-read-file",
+      "scope": [
+        "**"
+      ]
+    },
+    {
+      "identifier": "fs:allow-audio-read",
+      "scope": [
+        "**"
+      ]
+    },
+    "libmpv:default",
+    "mpv:default"
   ]
 }

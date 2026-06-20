@@ -1,0 +1,17 @@
+{
+  "1": {
+    "name": "night",
+    "cueType": "Media",
+    "extraData": {
+      "filePath": "/home/sophie/Documents/night.mp3"
+    }
+  },
+
+  "2": {
+    "name": "osc start",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/7/go"
+    }
+  }
+}

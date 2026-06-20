@@ -8,19 +8,6 @@ import { endMedia, pauseMedia, unpauseMedia } from "./media/playmedia";
 
 const cueManager = new CueManager();
 
-// Add some cues for testing
-
-cueManager.addCue(cueTypeEnum.Media, "my way", {
-  filePath: "/assets/my way.mp3",
-});
-
-let x = 9;
-for (var i = 0; i < x; i++) {
-  cueManager.addCue(cueTypeEnum.OSC, `Test${i}`, {
-    oscCommand: "/pb/7/go",
-  });
-}
-
 let playing = false;
 
 function previousCue() {}
@@ -56,7 +43,7 @@ function App() {
         <div data-tauri-drag-region></div>
         <div className="bg-transparent h-full inset-0 absolute flex self-center pointer-events-none justify-start align-middle items-center">
           {TopbarButton("Load", () => {
-            loadProject();
+            loadProject(cueManager);
           })}
         </div>
         <div className="bg-transparent inset-0 absolute flex self-center pointer-events-none justify-center align-middle items-center">

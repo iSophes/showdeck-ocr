@@ -1,4 +1,7 @@
-import { open } from "@tauri-apps/plugin-dialog";
+import { open, ask } from "@tauri-apps/plugin-dialog";
+import { readTextFile } from "@tauri-apps/plugin-fs";
+import { CueManager, cueTypeEnum } from "../cues/cuemanager";
+let unsavedFile = true;
 
 export async function saveProject() {
   // Saves currently loaded file, otherwise does a "save as"
@@ -35,12 +38,32 @@ export async function loadMedia() {
   return;
 }
 
-export async function loadProject() {
+export async function loadProject(cueManager: CueManager) {
   // Loads a project
 
+  if (unsavedFile) {
+    const answer = await ask("You have unsaved changes, are you sure?", {
+      title: "Showdeck",
+      kind: "warning",
+    });
+
+    if (!answer) {
+      return;
+    }
+  }
+
+  cueManager.removeAllCues();
   const projectFilePath = await getProjectFilePath();
 
   if (!projectFilePath) {
     return;
+  }
+
+  const parsedFile = await readTextFile(projectFilePath);
+  const Json = JSON.parse(parsedFile);
+  console.log(Json);
+  for (var x in Json) {
+    let currentEnum = cueTypeEnum[Json[x].cueType as keyof typeof cueTypeEnum];
+    cueManager.addCue(currentEnum, Json[x].cueName, Json[x].extraData);
   }
 }

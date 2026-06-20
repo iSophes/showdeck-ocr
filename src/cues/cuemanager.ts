@@ -2,10 +2,10 @@ import { Signal } from "@soncodi/signal";
 import { CueInterface } from "./cue";
 import { MediaCue } from "./mediacue";
 import { endMedia } from "../media/playmedia";
-import { OSCCue } from "./osccue"
+import { OSCCue } from "./osccue";
 export enum cueTypeEnum {
   "Media" = "Media",
-  "OSC" = "OSC"
+  "OSC" = "OSC",
 }
 
 function sortCues(cues: CueInterface[]): CueInterface[] {
@@ -33,15 +33,23 @@ export class CueManager {
     // creates a new cue for our cue manager.
     cueType: cueTypeEnum,
     cueName: string,
-    extraData: Partial<{ filePath: string , oscCommand: string }>,
+    extraData: Partial<{ filePath: string; oscCommand: string }>,
   ) {
-    let newCue
+    let newCue;
     if (cueType == cueTypeEnum.Media) {
-      newCue = new MediaCue(this.cues.length, cueName, extraData.filePath ? extraData.filePath : "");
+      newCue = new MediaCue(
+        this.cues.length,
+        cueName,
+        extraData.filePath ? extraData.filePath : "",
+      );
     }
 
     if (cueType == cueTypeEnum.OSC) {
-      newCue = new OSCCue(this.cues.length, cueName, extraData.oscCommand ? extraData.oscCommand : "");
+      newCue = new OSCCue(
+        this.cues.length,
+        cueName,
+        extraData.oscCommand ? extraData.oscCommand : "",
+      );
     }
 
     if (!newCue) {
@@ -54,14 +62,30 @@ export class CueManager {
     this.cueSignals[newCue.id.toString()] = [];
   }
 
+  removeAllCues() {
+    for (var cue of this.cues) {
+      cue.destroyCue();
+    }
+
+    this.cues = [];
+  }
+
   removeCue(cueId: number) {
     // removes a specific cue from the manager
     // NOTE: Do we need to resort at the end?
 
     sortCues(this.cues); // sort it in order first in case we aren't in order
+
+    for (var cue in this.cues) {
+      if (this.cues[cue].id == cueId) {
+        this.cues[cue].destroyCue();
+      }
+    }
+
     this.cues = this.cues.filter((cue) => {
       return cue.id !== cueId;
-    }); // keeps everything that doesn't have our cue id
+    });
+
     sortCues(this.cues); // resort
   }
 

@@ -17,6 +17,7 @@ export interface CueInterface {
   startCue(): void;
   pauseCue(): void;
   endCue(): void;
+  destroyCue(): void;
 }
 
 export class Cue implements CueInterface {
@@ -54,5 +55,9 @@ export class Cue implements CueInterface {
 
     this.status = CueState.Inactive; // When a cue ends, it will be inactive so we set it to this.
     this.updateCueStateSignal.emit(CueState.Inactive);
+  }
+
+  destroyCue(): void {
+    // empty, we keep this here in case other cues need anything
   }
 } // Superclass that all our cue types will inherit from
