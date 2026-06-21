@@ -19,9 +19,15 @@ export class MediaCue extends Cue {
 
   async startCue() {
     super.startCue(); // Start the cue
+
+    let filePath = this.filePath;
+    if (filePath[0] === "/") {
+      filePath = filePath.slice(1); // removes the first slash from linux
+    }
+
     invoke("play_audio", {
       id: this.id.toString(),
-      uri: `file://${this.filePath}`,
+      uri: `file:///${filePath.replace(/\\/g, "/").replace(/ /g, "%20")}`, // removes back slashes to forwards slashes and encodes spaces correctly
     });
   }
 
