@@ -134,6 +134,13 @@ fn fire_osc(osc_command: String, address: String, port: u32) -> Result<(), Strin
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    if let Ok(exe_path) = std::env::current_exe() {
+        if let Some(exe_dir) = exe_path.parent() {
+            let plugin_path = exe_dir.join("lib").join("gstreamer-1.0");
+            std::env::set_var("GST_PLUGIN_PATH", plugin_path);
+        }
+    }
+
     gstreamer::init().expect("Gstreamer failed to load"); // if gstreamer fails to load
 
     tauri::Builder::default()

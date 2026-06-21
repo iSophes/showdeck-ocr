@@ -3,7 +3,7 @@ import { readTextFile } from "@tauri-apps/plugin-fs";
 import { CueManager, cueTypeEnum } from "../cues/cuemanager";
 let unsavedFile = false;
 
-export async function saveProject() {
+/*export async function saveProject() {
   // Saves currently loaded file, otherwise does a "save as"
 }
 
@@ -15,7 +15,7 @@ async function getMediaFilePath(): Promise<string> {
   // Returns a file path for media
   return "";
 }
-
+*/
 async function getProjectFilePath(): Promise<string> {
   // Returns file path of a showdeck project
   const file = await open({
@@ -32,12 +32,12 @@ async function getProjectFilePath(): Promise<string> {
   return file ? file : ""; // return file or an empty string
 }
 
-export async function loadMedia() {
+/*export async function loadMedia() {
   // Loads media
 
   return;
 }
-
+*/
 export async function loadProject(cueManager: CueManager) {
   // Loads a project
 
