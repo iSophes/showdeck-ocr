@@ -1,8 +1,8 @@
 import { Signal } from "@soncodi/signal";
-import { CueInterface } from "./cue";
+import { CueInterface, CueState } from "./cue";
 import { MediaCue } from "./mediacue";
-import { endMedia } from "../media/playmedia";
 import { OSCCue } from "./osccue";
+import { invoke } from "@tauri-apps/api/core";
 export enum cueTypeEnum {
   "Media" = "Media",
   "OSC" = "OSC",
@@ -18,6 +18,8 @@ export class CueManager {
 
   cueSignals: { [key: string]: Signal[] };
 
+  preWaitPanicSignal: Signal;
+  regularPanicSignal: Signal;
   selectedCue: number;
 
   constructor() {
@@ -25,7 +27,8 @@ export class CueManager {
     this.cues = []; // cues can be an array
     this.activeCues = [];
     this.cueSignals = {};
-
+    this.preWaitPanicSignal = new Signal();
+    this.regularPanicSignal = new Signal();
     this.selectedCue = 0; // Index starts at 0
   }
 
@@ -33,14 +36,22 @@ export class CueManager {
     // creates a new cue for our cue manager.
     cueType: cueTypeEnum,
     cueName: string,
+    preWait: number,
+    postWait: number,
+    next: string,
     extraData: Partial<{ filePath: string; oscCommand: string }>,
+    cueManager: CueManager,
   ) {
     let newCue;
     if (cueType == cueTypeEnum.Media) {
       newCue = new MediaCue(
         this.cues.length,
         cueName,
+        preWait,
+        postWait,
+        next,
         extraData.filePath ? extraData.filePath : "",
+        cueManager,
       );
     }
 
@@ -48,7 +59,11 @@ export class CueManager {
       newCue = new OSCCue(
         this.cues.length,
         cueName,
+        preWait,
+        postWait,
+        next,
         extraData.oscCommand ? extraData.oscCommand : "",
+        cueManager,
       );
     }
 
@@ -105,7 +120,7 @@ export class CueManager {
     this.selectedCue -= 1; // go to previous cue
   }
 
-  playCue(cueId: number) {
+  async playCue(cueId: number) {
     // play our cue by id
     if (cueId < 0) {
       // if we don't have one selected, select the first cue
@@ -113,13 +128,43 @@ export class CueManager {
     }
 
     let cue = this.getCueById(cueId); // get our actual cue
+    this.selectedCue += 1; // move play head forward to next cue
+    console.log(this.selectedCue);
+
+    if (cue.next == "with") {
+      this.playCue(this.selectedCue);
+    }
+
+    if (cue.preWait > 0) {
+      let cancelled = false;
+
+      await new Promise<void>((resolve) => {
+        const timeout = setTimeout(() => {
+          console.log("preWait ms:", cue.preWait * 1000);
+          preWaitPanicSignalConnection.off();
+          resolve();
+        }, cue.preWait * 1000);
+        console.log("registering preWaitPanicSignal listener");
+        const preWaitPanicSignalConnection = this.preWaitPanicSignal.on(() => {
+          preWaitPanicSignalConnection.off();
+          cancelled = true;
+          clearTimeout(timeout);
+          resolve();
+        });
+      });
+
+      if (cancelled) {
+        console.log("cancel!");
+        return false;
+      }
+    }
 
     if (!cue) {
-      return;
+      return false;
     } // Check for types, will most likely always exist.
 
-    this.selectedCue += 1; // move play head forward to next cue
     cue.startCue(); // start our cue
+
     if (!this.activeCues[cue.id]) {
       this.activeCues.push(cue);
     } // make it active
@@ -127,6 +172,34 @@ export class CueManager {
     if (this.selectedCue == this.cues.length) {
       this.selectedCue = 0; // go back to start of the queue if we hit the end of it
     }
+
+    if (cue.next === "after") {
+      let regularPanic: ReturnType<typeof this.regularPanicSignal.once> | null =
+        null;
+      let stateChange: ReturnType<typeof cue.updateCueStateSignal.on> | null =
+        null;
+
+      if (cue.status === CueState.Ended || cue.status == CueState.Inactive) {
+        this.playCue(this.selectedCue);
+        return;
+      }
+
+      stateChange = cue.updateCueStateSignal.on((state: CueState) => {
+        if (state === CueState.Ended || state == CueState.Inactive) {
+          this.playCue(this.selectedCue);
+          regularPanic?.off();
+          stateChange?.off();
+          return;
+        }
+      });
+
+      regularPanic = this.regularPanicSignal.once(() => {
+        stateChange?.off();
+        return;
+      });
+    }
+
+    return true;
   }
 
   pauseCue(cueId: number) {
@@ -140,11 +213,14 @@ export class CueManager {
   }
 
   panicCues() {
-    console.log("panic");
+    invoke("panic_audio");
+    console.log("preWaitPanicSignal:", this.preWaitPanicSignal);
+    console.log("active cues:", this.activeCues);
+    this.preWaitPanicSignal.emit();
+    this.regularPanicSignal.emit();
+
     for (var cue of this.activeCues) {
-      console.log("cue");
       cue.endCue();
-      endMedia();
 
       for (var signal of this.cueSignals[cue.id.toString()]) {
         signal.off();

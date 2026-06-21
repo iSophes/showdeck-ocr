@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@soncodi/signal": "^2.0.7",

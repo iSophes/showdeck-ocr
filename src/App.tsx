@@ -1,40 +1,52 @@
+import { invoke } from "@tauri-apps/api/core";
 import "./App.css"; // Import our App.css file for styling, lets us use tailwind.
 import { PlaybackBox } from "./components/PlaybackBox";
 import { TitleButton, titleButtonType } from "./components/TitleButton";
 import { TopbarButton } from "./components/TopbarButton";
 import { CueManager } from "./cues/cuemanager";
 import { loadProject } from "./files/fileHandler";
-import { pauseMedia, unpauseMedia } from "./media/playmedia";
+import { useState } from "react";
 
 const cueManager = new CueManager();
 
-let playing = false;
+function App() {
+  const [playing, setPlaying] = useState(false);
 
-function previousCue() {}
+  function previousCue() {}
 
-function go() {
-  cueManager.playCue(cueManager.selectedCue);
-}
+  async function go() {
+    let cue = cueManager.getCueById(cueManager.selectedCue);
 
-function toggleCuePlayback() {
-  playing = !playing;
-  if (playing) {
-    unpauseMedia();
-    return;
+    if (!cue) {
+      return;
+    }
+
+    cueManager.playCue(cueManager.selectedCue);
+    setPlaying(true);
   }
 
-  pauseMedia();
-}
+  function toggleCuePlayback() {
+    console.log(playing);
 
-function panicCue() {
-  cueManager.panicCues();
-}
+    if (playing === true) {
+      setPlaying(false);
+      invoke("pause_all_audio");
+      return;
+    }
 
-function panicNextCue() {
-  cueManager.panicNext();
-}
+    setPlaying(true);
 
-function App() {
+    invoke("unpause_all_audio");
+  }
+
+  function panicCue() {
+    cueManager.panicCues();
+  }
+
+  function panicNextCue() {
+    cueManager.panicNext();
+  }
+
   return (
     // Create two divs with a grid pattern with catppuccin theme colours.
 
@@ -74,7 +86,7 @@ function App() {
         <div className="bg-ctp-base text-ctp-text w-full h-1/10 grid grid-cols-4 gap-3">
           {/* Create a 'grid' with 4 columns, putting each element in the grid. gap-3 will automatically position them with a gap of 3px*/}
           {PlaybackBox("PREVIOUS", previousCue)}
-          {PlaybackBox("PLAY", toggleCuePlayback)}
+          {PlaybackBox(`${playing ? "PAUSE" : "PLAY"}`, toggleCuePlayback)}
           {PlaybackBox("PANIC", panicCue)}
           {PlaybackBox("PANIC NEXT", panicNextCue)}
         </div>

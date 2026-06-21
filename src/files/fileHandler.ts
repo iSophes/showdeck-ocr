@@ -1,7 +1,7 @@
 import { open, ask } from "@tauri-apps/plugin-dialog";
 import { readTextFile } from "@tauri-apps/plugin-fs";
 import { CueManager, cueTypeEnum } from "../cues/cuemanager";
-let unsavedFile = true;
+let unsavedFile = false;
 
 export async function saveProject() {
   // Saves currently loaded file, otherwise does a "save as"
@@ -65,6 +65,18 @@ export async function loadProject(cueManager: CueManager) {
 
   for (var x in Json) {
     let currentEnum = cueTypeEnum[Json[x].cueType as keyof typeof cueTypeEnum]; // gets the current cue type
-    cueManager.addCue(currentEnum, Json[x].cueName, Json[x].extraData); // add the cue
+    let preWait = Json[x].prewait ? Json[x].prewait : 0;
+    let postWait = Json[x].postwait ? Json[x].postwait : 0;
+
+    let next = Json[x].next ? Json[x].next : "manually";
+    cueManager.addCue(
+      currentEnum,
+      Json[x].cueName,
+      preWait,
+      postWait,
+      next,
+      Json[x].extraData,
+      cueManager,
+    ); // add the cue
   }
 }

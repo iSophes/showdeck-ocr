@@ -15,6 +15,72 @@ struct AudioManager {
 struct AppState(pub Mutex<AudioManager>); // makes things mutable so we can edit runnings commands instead of creating new things
 
 #[tauri::command]
+async fn pause_audio(id: String, state: State<'_, AppState>) -> Result<(), String> {
+    let manager = state.inner().0.lock().unwrap(); // Get our audio manager
+
+    if let Some(pipeline) = manager.pipelines.get(&id) {
+        // if our pipeline exists, pause it.
+        pipeline
+            .set_state(gstreamer::State::Paused)
+            .map_err(|e| e.to_string())?; // pause it
+    }
+
+    Ok(())
+}
+
+#[tauri::command]
+async fn unpause_audio(id: String, state: State<'_, AppState>) -> Result<(), String> {
+    let manager = state.inner().0.lock().unwrap(); // Get our audio manager
+
+    if let Some(pipeline) = manager.pipelines.get(&id) {
+        pipeline
+            .set_state(gstreamer::State::Playing)
+            .map_err(|e| e.to_string())?; // unpause it
+    }
+
+    Ok(())
+}
+
+#[tauri::command]
+async fn pause_all_audio(state: State<'_, AppState>) -> Result<(), String> {
+    let manager = state.inner().0.lock().unwrap(); // Get our audio manager
+
+    for (_, value) in manager.pipelines.iter() {
+        value
+            .set_state(gstreamer::State::Paused)
+            .map_err(|e| e.to_string())?;
+    }
+
+    Ok(())
+}
+
+#[tauri::command]
+async fn unpause_all_audio(state: State<'_, AppState>) -> Result<(), String> {
+    let manager = state.inner().0.lock().unwrap(); // Get our audio manager
+
+    for (_, value) in manager.pipelines.iter() {
+        value
+            .set_state(gstreamer::State::Playing)
+            .map_err(|e| e.to_string())?;
+    }
+    Ok(())
+}
+
+#[tauri::command]
+async fn panic_audio(state: State<'_, AppState>) -> Result<(), String> {
+    let manager = state.inner().0.lock().unwrap(); // Get our audio manager so we can get multiple playing cues
+
+    // Get any existing pipelines with our cue and stop it
+    for (_, value) in manager.pipelines.iter() {
+        value
+            .set_state(gstreamer::State::Null)
+            .map_err(|e| e.to_string())?;
+    }
+
+    Ok(())
+}
+
+#[tauri::command]
 async fn play_audio(id: String, uri: String, state: State<'_, AppState>) -> Result<(), String> {
     let mut manager = state.inner().0.lock().unwrap(); // Get our audio manager so we can get multiple playing cues
 
@@ -34,7 +100,7 @@ async fn play_audio(id: String, uri: String, state: State<'_, AppState>) -> Resu
 
     pipeline
         .set_state(gstreamer::State::Playing) // make it play
-        .map_err(|e| e.to_string())?; //
+        .map_err(|e| e.to_string())?;
 
     manager.pipelines.insert(id, pipeline); // set it to our state so that we can track it for future
     Ok(())
@@ -77,7 +143,15 @@ pub fn run() {
         .manage(AppState(Mutex::new(AudioManager {
             pipelines: HashMap::new(),
         })))
-        .invoke_handler(tauri::generate_handler![fire_osc, play_audio])
+        .invoke_handler(tauri::generate_handler![
+            fire_osc,
+            play_audio,
+            panic_audio,
+            pause_audio,
+            unpause_audio,
+            pause_all_audio,
+            unpause_all_audio
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

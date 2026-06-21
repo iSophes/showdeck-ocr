@@ -4,14 +4,147 @@
     "cueType": "Media",
     "extraData": {
       "filePath": "C:\\Users\\Sophie\\Documents\\my way.mp3"
-    }
+    },
+    "next": "with",
+    "prewait": 0
   },
 
   "2": {
     "name": "osc start",
     "cueType": "OSC",
     "extraData": {
-      "command": "/pb/7/go"
-    }
+      "command": "/pb/9/go"
+    },
+    "next": "after",
+    "prewait": 0
+  },
+
+  "3": {
+    "name": "0.03",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/9/go"
+    },
+    "next": "after",
+    "prewait": 3
+  },
+
+  "4": {
+    "name": "0.16",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/9/go"
+    },
+    "next": "after",
+    "prewait": 13
+  },
+
+  "5": {
+    "name": "0.37",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/9/go"
+    },
+    "next": "after",
+    "prewait": 22
+  },
+
+  "6": {
+    "name": "1.03",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/9/go"
+    },
+    "next": "after",
+    "prewait": 26
+  },
+
+  "7": {
+    "name": "1.16",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/9/go"
+    },
+    "next": "after",
+    "prewait": 13
+  },
+
+  "8": {
+    "name": "1.36",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/9/go"
+    },
+    "next": "after",
+    "prewait": 20
+  },
+
+  "9": {
+    "name": "2.04",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/9/go"
+    },
+    "next": "after",
+    "prewait": 28
+  },
+
+  "10": {
+    "name": "2.08",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/9/go"
+    },
+    "next": "after",
+    "prewait": 4
+  },
+
+  "11": {
+    "name": "2.09",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/9/go"
+    },
+    "next": "after",
+    "prewait": 1
+  },
+
+  "12": {
+    "name": "2.16",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/9/go"
+    },
+    "next": "after",
+    "prewait": 7
+  },
+
+  "13": {
+    "name": "2.43",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/9/go"
+    },
+    "next": "after",
+    "prewait": 27
+  },
+
+  "14": {
+    "name": "2.57",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/9/go"
+    },
+    "next": "after",
+    "prewait": 14
+  },
+
+  "15": {
+    "name": "B/O",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/9/go"
+    },
+    "prewait": 3
   }
 }
