@@ -5,7 +5,7 @@ use rosc::{encoder, OscMessage, OscPacket};
 use std::collections::HashMap;
 use std::net::UdpSocket;
 use std::sync::Mutex;
-use tauri::State;
+use tauri::{Manager, State};
 
 struct AudioManager {
     // gives us a hashmap of gstreamer pipelines, similar to a Key-Value dictionary
@@ -89,7 +89,7 @@ async fn play_audio(id: String, uri: String, state: State<'_, AppState>) -> Resu
         existing
             .set_state(gstreamer::State::Null)
             .map_err(|e| e.to_string())?;
-    }
+    };
 
     let pipeline = gstreamer::parse::launch(&format!(
         // get our audio file, process it and set it to our primary speakers
@@ -134,12 +134,25 @@ fn fire_osc(osc_command: String, address: String, port: u32) -> Result<(), Strin
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    std::env::set_var("GST_REGISTRY_UPDATE", "no");
+
+    println!("GST_PLUGIN_PATH={:?}", std::env::var("GST_PLUGIN_PATH"));
+    println!(
+        "GST_PLUGIN_SCANNER={:?}",
+        std::env::var("GST_PLUGIN_SCANNER")
+    );
+    println!("GST_REGISTRY={:?}", std::env::var("GST_REGISTRY"));
+
     if let Ok(exe_path) = std::env::current_exe() {
         if let Some(exe_dir) = exe_path.parent() {
             let plugin_path = exe_dir.join("lib").join("gstreamer-1.0");
-            std::env::set_var("GST_PLUGIN_PATH", plugin_path);
+            std::env::set_var("GST_PLUGIN_PATH", &plugin_path);
+            std::env::set_var(
+                "GST_REGISTRY",
+                exe_dir.join("registry.bin").to_str().unwrap(),
+            );
         }
-    }
+    };
 
     gstreamer::init().expect("Gstreamer failed to load"); // if gstreamer fails to load
 
@@ -159,6 +172,11 @@ pub fn run() {
             pause_all_audio,
             unpause_all_audio
         ])
+        .setup(|app| {
+            let window = app.get_webview_window("main").unwrap();
+            window.open_devtools();
+            Ok(())
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

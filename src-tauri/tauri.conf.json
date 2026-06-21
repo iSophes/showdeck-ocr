@@ -12,6 +12,7 @@
   "app": {
     "windows": [
       {
+        "devtools": true,
         "decorations": false,
         "title": "ShowDeck",
         "width": 800,

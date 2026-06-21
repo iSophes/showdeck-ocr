@@ -22,7 +22,7 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={autopf}\{#MyAppName}
+DefaultDirName={localappdata}\{#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
 ; "ArchitecturesAllowed=x64compatible" specifies that Setup cannot run
 ; on anything but x64 and Windows 11 on Arm.
@@ -37,7 +37,7 @@ ArchitecturesInstallIn64BitMode=x64compatible
 ChangesAssociations=yes
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only).
-;PrivilegesRequired=lowest
+PrivilegesRequired=lowest
 OutputBaseFilename=showdeck-installer
 SolidCompression=yes
 WizardStyle=modern dynamic
@@ -49,7 +49,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\src-tauri\target\release\{#MyAppExeName}"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\src-tauri\target\release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstapp.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
 Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstaudioconvert.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
 Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstaudiomixer.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
@@ -69,21 +69,26 @@ Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstvol
 Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstvorbis.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
 Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstwasapi.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
 Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstwasapi2.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\ffi-7.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\FLAC-8.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gio-2.0-0.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\glib-2.0-0.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gmodule-2.0-0.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gobject-2.0-0.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gstbase-1.0-0.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gstreamer-1.0-0.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gthread-2.0-0.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\intl-8.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\mp3lame-0.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\ogg-0.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\opus-0.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\pcre2-8-0.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\vorbis-0.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gsttaglib.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstid3demux.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\ffi-7.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\FLAC-8.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gio-2.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\glib-2.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gmodule-2.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gobject-2.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gstbase-1.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gstreamer-1.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gthread-2.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\intl-8.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\mp3lame-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\ogg-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\opus-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\pcre2-8-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\vorbis-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gstvideo-1.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gstaudio-1.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gstpbutils-1.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]
@@ -91,7 +96,7 @@ Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExt}\OpenWithProgids"; ValueTyp
 Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}"; ValueType: string; ValueName: ""; ValueData: "{#MyAppAssocName}"; Flags: uninsdeletekey
 Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
 Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-Root: HKLM; Subkey: "SOFTWARE\GStreamer\1.0"; ValueType: string; ValueName: "SystemPluginsPath"; ValueData: "{app}\lib\gstreamer-1.0"; Flags: createvalueifdoesntexist uninsdeletekey
+Root: HKA; Subkey: "SOFTWARE\GStreamer\1.0"; ValueType: string; ValueName: "SystemPluginsPath"; ValueData: "{app}\lib\gstreamer-1.0"; Flags: createvalueifdoesntexist uninsdeletekey
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
