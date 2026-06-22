@@ -1,6 +1,7 @@
 import { invoke } from "@tauri-apps/api/core";
 import { Cue } from "./cue";
 import { CueManager } from "./cuemanager";
+import { getIP } from "../config";
 
 export class OSCCue extends Cue {
   // Inherit from cue!
@@ -26,10 +27,12 @@ export class OSCCue extends Cue {
   async startCue() {
     super.startCue(); // Start the cue
 
+    let split = getIP().split(":");
+
     invoke("fire_osc", {
       oscCommand: this.command,
-      address: "127.0.0.1", // 192.168.200.1
-      port: 8000,
+      address: split[0],
+      port: Number(split[1]),
     }); // fires a command in rust
 
     super.endCue(); // immediately end

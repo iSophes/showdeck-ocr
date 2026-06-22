@@ -50,45 +50,9 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\src-tauri\target\release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstapp.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstaudioconvert.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstaudiomixer.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstaudioparsers.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstaudioresample.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstautodetect.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstcoreelements.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstdirectsound.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstflac.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstisomp4.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstmpg123.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstogg.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstopus.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstplayback.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gsttypefindfunctions.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstvolume.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstvorbis.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstwasapi.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstwasapi2.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gsttaglib.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\gstid3demux.dll"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\ffi-7.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\FLAC-8.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gio-2.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\glib-2.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gmodule-2.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gobject-2.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gstbase-1.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gstreamer-1.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gthread-2.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\intl-8.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\mp3lame-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\ogg-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\opus-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\pcre2-8-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\vorbis-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gstvideo-1.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gstaudio-1.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\gstpbutils-1.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\lib\*"; DestDir: "{app}\lib\gstreamer-1.0"; Flags: ignoreversion
+Source: "C:\Users\Sophie\Documents\Computer Science\NEA\ShowDeck\dlls\bin\*"; DestDir: "{app}"; Flags: ignoreversion
+
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]

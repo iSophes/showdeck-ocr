@@ -71,7 +71,7 @@ export async function loadProject(cueManager: CueManager) {
     let next = Json[x].next ? Json[x].next : "manually";
     cueManager.addCue(
       currentEnum,
-      Json[x].cueName,
+      Json[x].name,
       preWait,
       postWait,
       next,

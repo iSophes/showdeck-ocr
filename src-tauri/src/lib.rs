@@ -127,21 +127,13 @@ fn fire_osc(osc_command: String, address: String, port: u32) -> Result<(), Strin
         .send_to(&buffer, format!("{}:{}", address, port))
         .map_err(|e| e.to_string())?;
 
-    println!("OSC message sent to {}:{}", address, port);
-
     Ok(())
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    std::env::set_var("GST_REGISTRY_UPDATE", "no");
-
-    println!("GST_PLUGIN_PATH={:?}", std::env::var("GST_PLUGIN_PATH"));
-    println!(
-        "GST_PLUGIN_SCANNER={:?}",
-        std::env::var("GST_PLUGIN_SCANNER")
-    );
-    println!("GST_REGISTRY={:?}", std::env::var("GST_REGISTRY"));
+    std::env::set_var("GST_PLUGIN_SCANNER", "no");
+    std::env::set_var("GST_REGISTRY_FORK", "no");
 
     if let Ok(exe_path) = std::env::current_exe() {
         if let Some(exe_dir) = exe_path.parent() {
@@ -152,9 +144,9 @@ pub fn run() {
                 exe_dir.join("registry.bin").to_str().unwrap(),
             );
         }
-    };
+    }
 
-    gstreamer::init().expect("Gstreamer failed to load"); // if gstreamer fails to load
+    gstreamer::init().expect("Gstreamer failed to load");
 
     tauri::Builder::default()
         .plugin(tauri_plugin_fs::init())

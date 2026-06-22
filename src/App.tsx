@@ -5,12 +5,23 @@ import { TitleButton, titleButtonType } from "./components/TitleButton";
 import { TopbarButton } from "./components/TopbarButton";
 import { CueManager } from "./cues/cuemanager";
 import { loadProject } from "./files/fileHandler";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { setIPGlobally } from "./config";
 
 const cueManager = new CueManager();
 
 function App() {
   const [playing, setPlaying] = useState(false);
+  const [selectedCue, setSelectedCue] = useState(0);
+  const [, forceUpdate] = useState(0);
+  const [ip, setIP] = useState("");
+
+  cueManager.onSelectedCueChange = setSelectedCue;
+  useEffect(() => {
+    cueManager.refreshUI = () => {
+      forceUpdate((x) => x + 1);
+    };
+  }, []);
 
   function previousCue() {}
 
@@ -90,9 +101,34 @@ function App() {
           {PlaybackBox("PANIC", panicCue)}
           {PlaybackBox("PANIC NEXT", panicNextCue)}
         </div>
+
+        <div className="@container flex flex-col py-11 w-full gap-3">
+          {cueManager.cues.map((cue, index) => (
+            <text
+              key={cue.id}
+              className={
+                index === selectedCue ? "text-ctp-green-500" : "text-ctp-text"
+              }
+            >
+              {cue.name}
+            </text>
+          ))}
+        </div>
       </div>
 
-      <video id="my-video"></video>
+      <input
+        value={ip}
+        onChange={(e) => setIP(e.target.value)}
+        className="text-white h-1/7 w-1/7 flex self-center"
+      />
+
+      <button
+        onClick={() => {
+          setIPGlobally(ip);
+        }}
+      >
+        Submit
+      </button>
     </div>
   );
 }

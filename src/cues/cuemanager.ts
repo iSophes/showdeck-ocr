@@ -21,6 +21,8 @@ export class CueManager {
   preWaitPanicSignal: Signal;
   regularPanicSignal: Signal;
   selectedCue: number;
+  onSelectedCueChange?: (cue: number) => void;
+  refreshUI?: () => void;
 
   constructor() {
     // creates a cuemanager
@@ -72,6 +74,7 @@ export class CueManager {
     }
 
     this.cues[newCue.id] = newCue;
+    this.refreshUI?.();
     sortCues(this.cues);
 
     this.cueSignals[newCue.id.toString()] = [];
@@ -80,6 +83,7 @@ export class CueManager {
   removeAllCues() {
     for (var cue of this.cues) {
       cue.destroyCue();
+      this.refreshUI?.();
     }
 
     this.cues = [];
@@ -94,6 +98,7 @@ export class CueManager {
     for (var cue in this.cues) {
       if (this.cues[cue].id == cueId) {
         this.cues[cue].destroyCue();
+        this.refreshUI?.();
       }
     }
 
@@ -114,10 +119,12 @@ export class CueManager {
   previousCue() {
     if (this.selectedCue == 0) {
       this.selectedCue = this.cues.length - 1; // Get last cue in manager if we are at the start of the list
+      this.onSelectedCueChange?.(this.selectedCue);
       return; // return once we get it so we dont go back again
     }
 
     this.selectedCue -= 1; // go to previous cue
+    this.onSelectedCueChange?.(this.selectedCue);
   }
 
   async playCue(cueId: number) {
@@ -128,12 +135,6 @@ export class CueManager {
     }
 
     let cue = this.getCueById(cueId); // get our actual cue
-    this.selectedCue += 1; // move play head forward to next cue
-    console.log(this.selectedCue);
-
-    if (cue.next == "with") {
-      this.playCue(this.selectedCue);
-    }
 
     if (cue.preWait > 0) {
       let cancelled = false;
@@ -163,6 +164,13 @@ export class CueManager {
       return false;
     } // Check for types, will most likely always exist.
 
+    this.selectedCue += 1; // move play head forward to next cue
+    this.onSelectedCueChange?.(this.selectedCue);
+
+    if (cue.next == "with") {
+      this.playCue(this.selectedCue);
+    }
+
     cue.startCue(); // start our cue
 
     if (!this.activeCues[cue.id]) {
@@ -171,6 +179,7 @@ export class CueManager {
 
     if (this.selectedCue == this.cues.length) {
       this.selectedCue = 0; // go back to start of the queue if we hit the end of it
+      this.onSelectedCueChange?.(this.selectedCue);
     }
 
     if (cue.next === "after") {
@@ -229,11 +238,13 @@ export class CueManager {
     this.activeCues = [];
 
     this.selectedCue = 0; // deselect everything
+    this.onSelectedCueChange?.(this.selectedCue);
   }
 
   panicNext() {
     let currentSelected = this.selectedCue;
     this.panicCues();
     this.selectedCue = currentSelected;
+    this.onSelectedCueChange?.(this.selectedCue);
   }
 }
