@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 const appWindow = getCurrentWindow();
 
 export enum titleButtonType {
-  "Close" = "Close",
-  "WinMax" = "WinMax", // Maximised or windowed button
-  "Minimise" = "Minimise",
+  Close = "Close",
+  WinMax = "WinMax", // Maximised or windowed button
+  Minimise = "Minimise",
 }
 
 async function clickButton(button: titleButtonType) {
