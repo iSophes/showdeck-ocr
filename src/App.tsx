@@ -6,7 +6,7 @@ import { TopbarButton } from "./components/TopbarButton";
 import { CueManager } from "./cues/cuemanager";
 import { loadProject } from "./files/fileHandler";
 import { useEffect, useState } from "react";
-import { setIPGlobally } from "./config";
+import { createConstants, setIPGlobally } from "./config";
 
 const cueManager = new CueManager();
 
@@ -15,6 +15,9 @@ function App() {
   const [selectedCue, setSelectedCue] = useState(0);
   const [, forceUpdate] = useState(0);
   const [ip, setIP] = useState("");
+  const constants = createConstants();
+
+  cueManager.constants = constants;
 
   cueManager.onSelectedCueChange = setSelectedCue;
   useEffect(() => {
@@ -71,7 +74,7 @@ function App() {
         </div>
         <div className="bg-transparent inset-0 absolute flex self-center pointer-events-none justify-center align-middle items-center">
           <text className="text-center pointer-events-auto bg-transparent text-sm">
-            ShowDeck | testfile.showdeck | 300 Cues{" "}
+            ShowDeck | {constants.currentFile} | {constants.cueTotal} Cues{" "}
             {/* this is just filler text for now */}
           </text>
         </div>

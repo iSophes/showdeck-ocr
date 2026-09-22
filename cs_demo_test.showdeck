@@ -1,0 +1,339 @@
+{
+  "1": {
+    "name": "leave me alone - renee rapp",
+    "cueType": "Media",
+    "extraData": {
+      "filePath": "C:\\Users\\Sophie\\Documents\\leave-me-alone.mp3"
+    },
+    "next": "with",
+    "prewait": 0
+  },
+
+  "2": {
+    "name": "LX START",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 0
+  },
+
+  "3": {
+    "name": "0.075",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 7.5
+  },
+
+  "4": {
+    "name": "0.11",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 3.5
+  },
+
+  "5": {
+    "name": "0.15",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 4.25
+  },
+
+  "6": {
+    "name": "0.18",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 3
+  },
+
+  "7": {
+    "name": "0.22",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 4
+  },
+
+  "8": {
+    "name": "0.25",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 3.5
+  },
+
+  "9": {
+    "name": "0.28",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 3
+  },
+
+  "10": {
+    "name": "0.32",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 4
+  },
+
+  "11": {
+    "name": "0.36",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 4
+  },
+
+  "12": {
+    "name": "0.48",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 12
+  },
+
+  "13": {
+    "name": "0.51",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 3
+  },
+
+  "14": {
+    "name": "0.55",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 4
+  },
+
+  "15": {
+    "name": "0.58",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 3
+  },
+
+  "16": {
+    "name": "1.02",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 4
+  },
+
+  "17": {
+    "name": "1.06",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 4
+  },
+
+  "18": {
+    "name": "1.09",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 3
+  },
+
+  "19": {
+    "name": "1.13",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 4
+  },
+
+  "20": {
+    "name": "1.17",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 4
+  },
+
+  "21": {
+    "name": "1.21",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 4
+  },
+
+  "22": {
+    "name": "1.31",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 10
+  },
+
+  "23": {
+    "name": "1.35",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 4
+  },
+
+  "24": {
+    "name": "1.46",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 11
+  },
+
+  "25": {
+    "name": "1.50",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 4
+  },
+
+  "26": {
+    "name": "1.53",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 3
+  },
+
+  "27": {
+    "name": "1.57",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 4
+  },
+
+  "28": {
+    "name": "2.01",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 4
+  },
+
+  "29": {
+    "name": "2.04",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 3
+  },
+
+  "30": {
+    "name": "2.08",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 4
+  },
+
+  "31": {
+    "name": "2.11",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 3
+  },
+
+  "32": {
+    "name": "2.15",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 4
+  },
+
+  "33": {
+    "name": "2.18 - END",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    },
+    "next": "after",
+    "prewait": 3
+  },
+
+  "34": {
+    "name": "B/O WORK",
+    "cueType": "OSC",
+    "extraData": {
+      "command": "/pb/6/go"
+    }
+  }
+}

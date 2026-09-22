@@ -3,9 +3,10 @@ import { CueInterface, CueState } from "./cue";
 import { MediaCue } from "./mediacue";
 import { OSCCue } from "./osccue";
 import { invoke } from "@tauri-apps/api/core";
+import { constants } from "../config";
 export enum cueTypeEnum {
-  "Media" = "Media",
-  "OSC" = "OSC",
+  Media = "Media",
+  OSC = "OSC",
 }
 
 function sortCues(cues: CueInterface[]): CueInterface[] {
@@ -17,7 +18,7 @@ export class CueManager {
   activeCues: CueInterface[];
 
   cueSignals: { [key: string]: Signal[] };
-
+  constants?: constants;
   preWaitPanicSignal: Signal;
   regularPanicSignal: Signal;
   selectedCue: number;
@@ -74,6 +75,10 @@ export class CueManager {
     }
 
     this.cues[newCue.id] = newCue;
+    if (this.constants) {
+      this.constants.setTotal(this.cues.length);
+    }
+
     this.refreshUI?.();
     sortCues(this.cues);
 
@@ -81,6 +86,10 @@ export class CueManager {
   }
 
   removeAllCues() {
+    if (this.constants) {
+      this.constants.setTotal(0);
+    }
+
     for (var cue of this.cues) {
       cue.destroyCue();
       this.refreshUI?.();
@@ -98,6 +107,9 @@ export class CueManager {
     for (var cue in this.cues) {
       if (this.cues[cue].id == cueId) {
         this.cues[cue].destroyCue();
+        if (this.constants) {
+          this.constants.setTotal(this.cues.length);
+        }
         this.refreshUI?.();
       }
     }
@@ -145,7 +157,6 @@ export class CueManager {
           preWaitPanicSignalConnection.off();
           resolve();
         }, cue.preWait * 1000);
-        console.log("registering preWaitPanicSignal listener");
         const preWaitPanicSignalConnection = this.preWaitPanicSignal.on(() => {
           preWaitPanicSignalConnection.off();
           cancelled = true;
@@ -155,7 +166,6 @@ export class CueManager {
       });
 
       if (cancelled) {
-        console.log("cancel!");
         return false;
       }
     }
@@ -223,8 +233,6 @@ export class CueManager {
 
   panicCues() {
     invoke("panic_audio");
-    console.log("preWaitPanicSignal:", this.preWaitPanicSignal);
-    console.log("active cues:", this.activeCues);
     this.preWaitPanicSignal.emit();
     this.regularPanicSignal.emit();
 

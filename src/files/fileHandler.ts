@@ -63,6 +63,13 @@ export async function loadProject(cueManager: CueManager) {
   const parsedFile = await readTextFile(projectFilePath); // reads our file
   const Json = JSON.parse(parsedFile); // parses to dictionary
 
+  const split_string =
+    projectFilePath.split("\\").length > 0
+      ? projectFilePath.split("\\")
+      : projectFilePath.split("/"); // make an array of all the elements that make up our string. windows uses back slashes, macos and linux use forward ones
+
+  cueManager.constants?.setFile(split_string[split_string.length - 1]); // get last index of array with our file name and set it.
+
   for (var x in Json) {
     let currentEnum = cueTypeEnum[Json[x].cueType as keyof typeof cueTypeEnum]; // gets the current cue type
     let preWait = Json[x].prewait ? Json[x].prewait : 0;
