@@ -32,7 +32,7 @@ export class OSCCue extends Cue {
     invoke("fire_osc", {
       oscCommand: this.command,
       address: split[0],
-      port: Number(split[1]),
+      port: Number(split[1]) ? Number(split[1]) : 8000,
     }); // fires a command in rust
 
     super.endCue(); // immediately end

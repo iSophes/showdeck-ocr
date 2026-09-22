@@ -3,7 +3,7 @@
     "name": "leave me alone - renee rapp",
     "cueType": "Media",
     "extraData": {
-      "filePath": "C:\\Users\\Sophie\\Documents\\leave-me-alone.mp3"
+      "filePath": "/home/sophie/Documents/leave-me-alone.mp3"
     },
     "next": "with",
     "prewait": 0
